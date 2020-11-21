@@ -36,6 +36,7 @@ class Patient(models.Model):
     bed = models.OneToOneField('Bed', on_delete=models.SET_NULL, blank=True, null=True)
     medicines = models.ManyToManyField('Medicine', blank=True)
     health_details = models.OneToOneField('HealthDetails', on_delete=models.CASCADE, blank=True, null=True)
+    severity_score = models.IntegerField(default=0)
     severity = models.IntegerField(choices=severities, default=1)
 
     def __str__(self):
@@ -76,6 +77,9 @@ class HealthDetails(models.Model):
                 score += 10
 
         score = 23 if score > 23 else score
+
+        self.patient.severity_score = score
+        self.patient.save()
         
         return int((score / 23) * 4)
 
@@ -162,7 +166,7 @@ class Ward(models.Model):
 class Bed(models.Model):
     available = models.BooleanField(default=True)
     ward = models.ForeignKey('Ward', on_delete=models.CASCADE)
-    ventilator = models.ManyToManyField('Ventilator', blank=True)
+    ventilator = models.OneToOneField('Ventilator', blank=True, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         status = '(Available)' if self.available else '(Unavailable)'
@@ -186,7 +190,7 @@ class LabTest(models.Model):
     ]
 
     type = models.CharField(max_length=2, choices=type_choices)
-    result = models.CharField(max_length=1, choices=result_choices)
+    result = models.CharField(max_length=1, choices=result_choices, blank=True)
     testing_date = models.DateTimeField()
     test_duration = models.IntegerField('Hours until test results')
     patient = models.ForeignKey('Patient', on_delete=models.CASCADE, null=True, blank=True)

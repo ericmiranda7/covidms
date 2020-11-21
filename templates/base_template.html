@@ -3,6 +3,12 @@
 	<!-- Static assets - Used to load the Favicon -->
 	{% load static %}
 	<head>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+
 		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
 
@@ -31,7 +37,7 @@
 						href="http://localhost:8000/admin/">Staff</a></li>
                    
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                            href="{% url 'patients' %}">Patient Listing</a></li>
+                            href="http://localhost:8000/admin/hospital/patient/">Patient Listing</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="http://localhost:8000/admin/hospital/patient/add/">Add Patient</a></li>
                     

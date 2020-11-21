@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 
 # Register your models here.
 model_list = [
@@ -14,16 +14,17 @@ admin.site.register(model_list)
 
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ['name', 'severity']
+    list_display = ['name', 'severity', 'admit_date', 'get_ward']
     list_filter = ['severity']
-    search_fields = ['name', 'aadhar']
+    search_fields = ['name', 'aadhar', 'insurance', 'status',]
 
-    """ def get_severity(self, obj):
-        return obj.health_details.severity
-    get_severity.admin_order_field = 'health_details__severity'
-    get_severity.short_description = 'Severity' """
-
-    # Filtering on side
+    def get_ward(self, obj):
+        try:
+            return obj.bed.ward
+        except:
+            return 'Not assigned bed'
+    get_ward.admin_order_field = 'bed__ward'
+    get_ward.short_description = 'Ward No.'
 
 
 @admin.register(models.HealthDetails)
@@ -50,12 +51,18 @@ def make_bed_unavailable(sender, instance, created, **kwargs):
         bed.available=False
         bed.save()
 
+@receiver(pre_delete, sender=models.Patient)
+def make_bed_available(sender, instance, **kwargs):
+    bed = instance.bed
+    if instance.bed:
+        bed.available=True
+        bed.save()
+
+
 @receiver(post_save, sender=models.HealthDetails)
 def derive_severity(sender, instance, created, **kwargs):
     try:
         patient = instance.patient
-        print('hi')
-        print(instance.calculate_severity())
         patient.severity = instance.calculate_severity()
         patient.save()
     except:

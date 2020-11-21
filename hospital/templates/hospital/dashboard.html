@@ -14,20 +14,16 @@
                     <div class="row">
 
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0"><a href={% url 'patients' %}>Patient Statistics</a></h5><br>
+                        <h5 class="card-title text-uppercase text-muted mb-0"><a href="http://localhost:8000/admin/hospital/patient/" class="text-info">Patient Statistics</a></h5><br>
                         
                         <center>
-                        <!-- <div class="p-2 mb-2 bg-success text-white"><h5>Recovered:{{ statistics.recovered }}</div>
-                        <div class="p-2 mb-2 bg-danger text-white"><h5>Admitted: {{ statistics.admitted }}</div>
-                        <div class="p-2 mb-2 bg-light text-dark"><h5>Deceased: {{ statistics.deceased }}</h5></div> -->
-
                         <div class="card text-white bg-success mb-3 p-0" style="max-width: 18rem;">
                           <div class="card-header"><h5>Recovered:{{ statistics.recovered }}</h5></div>  
                         </div>
-                        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
                           <div class="card-header"><h5>Admitted: {{ statistics.admitted }}</h5></div>                                  
                         </div>
-                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                           <div class="card-header"><h5>Deceased: {{ statistics.deceased }}</h5></div>                                  
                         </div>
                       </center>
@@ -53,23 +49,16 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Resources</h5><br>
+                        <h5 class="card-title text-uppercase text-info mb-0">Resources</h5><br>
                         
                         <center>
-                          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header"><h5>Bed: 350</h5></div>                                  
+                          <div class="card text-white {% if free_beds > 2 %} bg-info {% elif free_beds > 1 %} bg-warning {% else %} bg-danger {% endif %} mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><h5>Beds available: {{ free_beds }} / {{ beds.count }}</h5></div>                                  
                           </div>
 
-                          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header"><h5>Ventilator: 35</h5></div>                                  
+                          <div class="card text-white {% if used_vents == 2 %} bg-danger {% elif used_vents == 1 %} bg-warning {% else %} bg-info {% endif %} mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><h5>Ventilators used: {{ used_vents }} / {{ vents.count }} </h5></div>                                  
                           </div>
-
-                          <!-- <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header"><h5>Total : 500</h5></div>                                  
-                          </div> -->
-                          <!-- <div class="p-2 mb-2 bg-success text-white"><h5>Bed: 350,897</div>
-                          <div class="p-2 mb-2 bg-danger text-white"><h5>Ventilator: 350,897</div>
-                          <div class="p-2 mb-2 bg-light text-dark"><h5>Ventilator: 350,897</h5></div> -->
                         </center>
                       </div>
                       <div class="col-auto">
@@ -90,27 +79,29 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Lab Results</h5><br>
+                        <h5 class="card-title text-uppercase text-muted mb-0"><a href="http://localhost:8000/admin/hospital/labtest/" class="text-info">Lab Results</a></h5><br>
+                        <center>
                         <table>
                           <tr><td colspan="2" >                            
                             <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                              <div class="card-header"><h5>Total : 500</h5></div>                                  
+                              <div class="card-header"><h5>Total: {{ lab_tests.count }}</h5></div>                                  
                             </div>
                           </td></tr>
                           
                           <tr>
                             <td>
                               <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                                <div class="card-header"><h5>+ve : 500</h5></div>                                  
+                                <div class="card-header"><h5>+VE: {{ lab_pos }}</h5></div>                                  
                               </div>
                             </td>
                             <td>
                               <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                                <div class="card-header"><h5>-ve : 500</h5></div>  
+                                <div class="card-header"><h5>-VE: {{ lab_neg }}</h5></div>  
                               </div>
                             </td>
                           </tr>                        
                         </table>
+                        </center>
                       </div>
                       <div class="col-auto">
                         <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -140,7 +131,7 @@
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+                    <h6 class="text-uppercase text-info ls-1 mb-1">Overview</h6>
                     <h2 class="text-white mb-0">Graphs</h2>
                   </div>
                   <div class="col">
@@ -170,7 +161,7 @@
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h6 class="text-uppercase text-muted ls-1 mb-1">Stock</h6>
+                    <h6 class="text-uppercase text-info ls-1 mb-1">Stock</h6>
                     <h2 class="mb-0">Medicines</h2>
                   </div>
                 </div>
