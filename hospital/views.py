@@ -19,12 +19,12 @@ class PatientListView(ListView):
 
     def get_queryset(self, **kwargs):
         form = self.form_class(self.request.GET)
-        patient = super(PatientListView, self).get_queryset(**kwargs)
+        patients = super(PatientListView, self).get_queryset(**kwargs)
 
         if form.is_valid():
-            print('valid')
+            patients = self.model.objects.filter(name__contains=form.cleaned_data['name'])
             
-        return patient
+        return patients
 
     def get_context_data(self, **kwargs):
         context = super(PatientListView, self).get_context_data(**kwargs)
