@@ -56,7 +56,26 @@ class HealthDetails(models.Model):
         (5, 'Requires urgent care'),
     ]
 
-    symptoms = models.TextField() #make comma seperated
+    #symptoms
+    fever = models.BooleanField(default=False)
+    dry_cough = models.BooleanField(default=False)
+    tiredness = models.BooleanField(default=False)
+
+    # less common symptoms
+    aches = models.BooleanField(default=False)
+    sore_throat = models.BooleanField(default=False)
+    diarrhoea = models.BooleanField(default=False)
+    conjunctivitis = models.BooleanField(default=False)
+    headache = models.BooleanField(default=False)
+    loss_of_taste_or_smell = models.BooleanField(default=False)
+    rash = models.BooleanField(default=False)
+
+    #serious symptoms
+    shortness_of_breath = models.BooleanField(default=False)
+    chest_pain = models.BooleanField(default=False)
+    loss_of_speech = models.BooleanField(default=False)
+    
+
     severity = models.IntegerField(choices=severities, default=1)
     comorbid = models.CharField(
         max_length=12,
