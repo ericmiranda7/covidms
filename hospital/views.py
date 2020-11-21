@@ -6,6 +6,10 @@ from django.views import View
 from . import models
 from .forms import SearchForm
 
+import matplotlib.pyplot as plt
+import io
+import urllib, base64
+
 # Create your views here.
 
 
@@ -63,3 +67,14 @@ class PatientListView(ListView):
 
 class PatientDetailView(DetailView):
     model = models.Patient
+
+
+def graph(request):
+    plt.plot(range(10))
+    fig = plt.gcf()
+    buf = io.ByteIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string= base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    return render(request,dashboard.html,{'data':uri})
