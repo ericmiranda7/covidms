@@ -223,7 +223,6 @@ radio{
   height: 1em;
 }
 
-<<<<<<< HEAD
 html {
   font-family: sans-serif;
 }
@@ -251,12 +250,10 @@ td {
 
 tr:nth-child(even) td {
   background-color: rgb(250,250,250);
-=======
 .custom-radio-list {
   list-style: none;
   padding: 0;
   margin: 0;
-
 }
 
 .errorMessage {
