@@ -11,7 +11,7 @@
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
+    <p class="errorMessage">Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
     {% else %}
     <p>Please login to see this page.</p>
@@ -30,8 +30,8 @@
                 <div class="divider-custom-line"></div>
             </div>
              <!-- SignInSection Form-->
-                <div class="form-group boxShadow">
-                
+                <div class="form-group loginForm boxShadow">
+
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <table class="col-xs-1" align="center" style="font-size: 104%">
@@ -39,16 +39,25 @@
                                 <td>{{ form.username.label_tag }}</td>
                                 <td>{{ form.username }}</td>
                             </tr>
-                           <tr><td><p></p></td></tr>
+                           <tr>
+                               <td><p></p></td>
+                               <td><p></p></td>
+                            </tr>
                             <tr>
                                 <td>{{ form.password.label_tag }}</td>
                                 <td>{{ form.password }}</td>
                             </tr>
-                            <tr><td><p></p></td></tr>
                             <tr>
-                                <td><input class="btn btn-primary" type="submit" value="Login"></td>
-                                <td >
-                                   
+                                <td><p></p></td>
+                                <td><p></p></td>
+                             </tr>
+
+                             <tr>
+                                 <td> &nbsp; </td>
+                             </tr>
+
+                            <tr>
+                                <td colspan="2"><input class="btn btn-primary" type="submit" value="Login"></td>
                             </tr>
                         </table>                     
                        

@@ -223,6 +223,7 @@ radio{
   height: 1em;
 }
 
+<<<<<<< HEAD
 html {
   font-family: sans-serif;
 }
@@ -250,18 +251,19 @@ td {
 
 tr:nth-child(even) td {
   background-color: rgb(250,250,250);
-}
-
-tr:nth-child(odd) td {
-  background-color: rgb(245,245,245);
-}
-
-caption {
-  padding: 10px;
-}
-
+=======
 .custom-radio-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
+
+}
+
+.errorMessage {
+  color: #cf0e0e;
+  letter-spacing: 0.5px;
+}
+
+.loginForm {
+  background-color: #fff;
 }
