@@ -8,3 +8,10 @@ class SearchForm(forms.ModelForm):
             'name',
             'insurance',
         ]
+
+    severities = [
+        (1, 'Name'),
+        (2, 'Severity'),
+    ]
+
+    severity = forms.ChoiceField(choices=severities, widget=forms.RadioSelect)

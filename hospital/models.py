@@ -10,7 +10,7 @@ class Patient(models.Model):
         (2, 'Discharged'),
         (3, 'Recovered'),
         (4, 'Deceased'),
-        ]
+    ]
 
     name = models.CharField(max_length=32)
     address = models.CharField(max_length=128)
@@ -42,8 +42,16 @@ class HealthDetails(models.Model):
         ('DB', 'Diabeties'),
         ('CD', 'Cardiovascular Disease'),
     ]
+    severities = [
+        (1, 'Mild'),
+        (2, 'Potenitally worsening'),
+        (3, 'Moderate severity'),
+        (4, 'High severity'),
+        (5, 'Requires urgent care'),
+    ]
 
     symptoms = models.TextField() #make comma seperated
+    severity = models.IntegerField(choices=severities, default=1)
     comorbid = models.CharField(
         max_length=12,
         choices=diseases,
