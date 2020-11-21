@@ -228,3 +228,12 @@ radio{
   padding: 0;
   margin: 0;
 }
+
+.errorMessage {
+  color: #cf0e0e;
+  letter-spacing: 0.5px;
+}
+
+.loginForm {
+  background-color: #fff;
+}
