@@ -1,20 +1,37 @@
 {% extends 'base_template.html' %}
 
 {% block bodyContent %}
-    <h5 class="card-title text-uppercase text-muted mb-0"> Dashboard</h5>
-    <h1>Patients</h1>
-    <p>Search</p>
-    <form method="GET">
-    {% csrf_token %}
-    {{ searchForm }}
-    <input type="submit">
-    </form>
-    <ul>
-    {% for patient in object_list %}
-        <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
-    {% empty %}
-        <li>No articles yet.</li>
-    {% endfor %}
-    </ul>
+<section class="page-section" id="contact">
+    <div class="container">
+        <!-- SignInSection Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Patients</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><b>*</b></div>
+            <div class="divider-custom-line"></div>
+        </div>
+         <!-- SignInSection Form-->
+            <div class="form-group boxShadow">
+    
+            <p>Search</p>
+            <form method="GET">
+                {% csrf_token %}
+                {{ searchForm.as_p }}
+                <input type="submit">
+            </form>
+            <ul>
+                {% for patient in object_list %}
+                    <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
+                {% empty %}
+                    <li>No articles yet.</li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+            
+        <!-- SignInSection Form-->
+    </div>
+</section>
 
 {% endblock %}

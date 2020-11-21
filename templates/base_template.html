@@ -9,11 +9,7 @@
 	<!-- Favicon - loaded as static -->
 	<!-- <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
 	</head>
-	<!-- <body>
-		{% block body %}
-		
-		{% endblock %}
-	</body> -->
+
 
 	
 <body class="{% if not request.resolver_match.url_name == 'home' %} body-padding {% endif %}">
@@ -63,7 +59,7 @@
             </div>
         </div>
     </nav>
-	<br><br><br><br><br>
+	<!-- <br><br><br><br><br> -->
 	{% block bodyContent %}
 	 	replace here
 	{% endblock %}
