@@ -14,14 +14,14 @@ admin.site.register(model_list)
 
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ['name', 'get_severity']
-    list_filter = ['health_details__severity', ]
+    list_display = ['name',]
+    list_filter = []
     search_fields = ['name', 'aadhar']
 
-    def get_severity(self, obj):
+    """ def get_severity(self, obj):
         return obj.health_details.severity
     get_severity.admin_order_field = 'health_details__severity'
-    get_severity.short_description = 'Severity'
+    get_severity.short_description = 'Severity' """
 
     # Filtering on side
 
@@ -30,22 +30,34 @@ class PatientAdmin(admin.ModelAdmin):
 class HealthDetailsAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('severity', 'comorbid', 'blood_group', ('is_smoker', 'is_drinker'))
+            'fields': ('comorbid', 'blood_group', ('is_smoker', 'is_drinker'))
         }),
         ('Symptoms', {
             'fields': (
                 ('fever', 'dry_cough', 'tiredness', 'aches', 'sore_throat',
                 'diarrhoea', 'conjunctivitis', 'headache', 'rash',
                 'loss_of_taste_or_smell', 'shortness_of_breath',
-                'chest_pain', 'loss_of_speech'),
+                'chest_pain',),
             )
         })
     )
 
 # Signals to update related models
-@ receiver(post_save, sender=models.Patient)
+@receiver(post_save, sender=models.Patient)
 def make_bed_unavailable(sender, instance, created, **kwargs):
     bed=instance.bed
     if instance.bed:
         bed.available=False
         bed.save()
+
+@receiver(post_save, sender=models.HealthDetails)
+def derive_severity(sender, instance, created, **kwargs):
+    try:
+        patient = instance.patient
+        print('hi')
+        print(instance.calculate_severity())
+        patient.severity = instance.calculate_severity()
+        patient.save()
+    except:
+        pass
+

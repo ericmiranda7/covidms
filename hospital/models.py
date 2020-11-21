@@ -13,6 +13,14 @@ class Patient(models.Model):
         (4, 'Deceased'),
     ]
 
+    severities = [
+        (1, 'Mild'),
+        (2, 'Potenitally worsening'),
+        (3, 'Moderate severity'),
+        (4, 'High severity'),
+        (5, 'Requires urgent care'),
+    ]
+
     name = models.CharField(max_length=32)
     dob = models.DateField()
     address = models.CharField(max_length=128)
@@ -27,6 +35,7 @@ class Patient(models.Model):
     bed = models.OneToOneField('Bed', on_delete=models.SET_NULL, blank=True, null=True)
     medicines = models.ManyToManyField('Medicine', blank=True)
     health_details = models.OneToOneField('HealthDetails', on_delete=models.CASCADE, blank=True, null=True)
+    severity = models.IntegerField(choices=severities, default=1)
 
     def __str__(self):
         return self.name
@@ -44,16 +53,30 @@ class Kin(models.Model):
         return self.name
 
 class HealthDetails(models.Model):
+    def calculate_severity(self):
+        score = 0
+        med_list = [self.aches, self.sore_throat, self.diarrhoea, self.conjunctivitis, self.headache,
+            self.loss_of_taste_or_smell, self.rash,
+        ]
+        high_list = [self.shortness_of_breath, self.chest_pain, self.loss_of_speech]
+
+        for bool, count in enumerate(med_list):
+            if bool:
+                score += 2
+            if count > 3:
+                score += 5
+        
+        for bool in high_list:
+            if bool:
+                score += 10
+
+        score = 23 if score > 23 else score
+        
+        return int((score / 23) * 5)
+
     diseases = [
         ('DB', 'Diabeties'),
         ('CD', 'Cardiovascular Disease'),
-    ]
-    severities = [
-        (1, 'Mild'),
-        (2, 'Potenitally worsening'),
-        (3, 'Moderate severity'),
-        (4, 'High severity'),
-        (5, 'Requires urgent care'),
     ]
 
     #symptoms
@@ -74,9 +97,8 @@ class HealthDetails(models.Model):
     shortness_of_breath = models.BooleanField(default=False)
     chest_pain = models.BooleanField(default=False)
     loss_of_speech = models.BooleanField(default=False)
-    
 
-    severity = models.IntegerField(choices=severities, default=1)
+
     comorbid = models.CharField(
         max_length=12,
         choices=diseases,
@@ -88,7 +110,12 @@ class HealthDetails(models.Model):
     is_drinker = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.patient.name + "'s Health Record"
+        try:
+            return self.patient.name + "'s Health Record"
+        except:
+            return "Health Record " + str(self.id)
+
+    
 
 
 class Doctor(models.Model):
@@ -133,7 +160,8 @@ class Bed(models.Model):
     ventilator = models.ManyToManyField('Ventilator', blank=True)
 
     def __str__(self):
-        return 'Bed ' + str(self.id)
+        status = '(Available)' if self.available else '(Unavailable)'
+        return 'Bed ' + str(self.id) + status
 
 class Ventilator(models.Model):
     available = models.BooleanField(default=True)
