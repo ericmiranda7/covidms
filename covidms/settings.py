@@ -121,6 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
 
+
+# Redirect after login / logout
+LOGIN_REDIRECT_URL = '/' #hospital/dashboard
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
