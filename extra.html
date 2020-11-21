@@ -1,0 +1,76 @@
+{% extends "base_template.html" %}
+
+{% block body %}
+
+{% if form.errors %}
+<script>
+    alert("Your username and password didn't match. Please try again.");
+</script>
+
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+<!-- SignInSection-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <!-- SignInSection Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Sign In</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+             <!-- SignInSection Form-->
+                <div class="form-group boxShadow">
+
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <table class="col-xs-1" align="center" style="font-size: 104%">
+                            <tr>
+                                <td>{{ form.username.label_tag }}</td>
+                                <td>{{ form.username }}</td>
+                            </tr>
+                           <tr><td><p></p></td></tr>
+                            <tr>
+                                <td>{{ form.password.label_tag }}</td>
+                                <td>{{ form.password }}</td>
+                            </tr>
+                            <!-- <tr><td><p></p></td></tr>
+                            <tr>
+                                <td><input class="btn btn-primary" type="submit" value="Login"></td>
+                                <td >
+                                    {# Assumes you setup the password_reset view in your URLconf, CHANGE URL #}
+                                    <a style="margin-left: 36%;" href="{% url 'login' %}">Lost password?</a>
+                                    <input type="hidden" name="next" value="{{ next }}">                                    
+                                </td>
+                            </tr>
+                            <tr>                                
+                                <td colspan="2">Don't have account? <a href="{% url 'signup' %}">SignUp Here</a></td>
+                            </tr> -->
+                        </table>                     
+                       
+                        
+                    </form>
+                    
+
+                </div>
+            
+            <!-- SignInSection Form-->
+        </div>
+    </section>
+  <!-- SignIn Section-->
+
+
+
+
+{% endblock %}
