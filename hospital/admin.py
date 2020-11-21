@@ -14,8 +14,8 @@ admin.site.register(model_list)
 
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ['name',]
-    list_filter = []
+    list_display = ['name', 'severity']
+    list_filter = ['severity']
     search_fields = ['name', 'aadhar']
 
     """ def get_severity(self, obj):
@@ -37,7 +37,7 @@ class HealthDetailsAdmin(admin.ModelAdmin):
                 ('fever', 'dry_cough', 'tiredness', 'aches', 'sore_throat',
                 'diarrhoea', 'conjunctivitis', 'headache', 'rash',
                 'loss_of_taste_or_smell', 'shortness_of_breath',
-                'chest_pain',),
+                'chest_pain', 'loss_of_speech'),
             )
         })
     )

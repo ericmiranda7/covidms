@@ -14,11 +14,11 @@ class Patient(models.Model):
     ]
 
     severities = [
-        (1, 'Mild'),
-        (2, 'Potenitally worsening'),
-        (3, 'Moderate severity'),
-        (4, 'High severity'),
-        (5, 'Requires urgent care'),
+        (0, 'Mild'),
+        (1, 'Potenitally worsening'),
+        (2, 'Moderate severity'),
+        (3, 'High severity'),
+        (4, 'Requires urgent care'),
     ]
 
     name = models.CharField(max_length=32)
@@ -60,19 +60,23 @@ class HealthDetails(models.Model):
         ]
         high_list = [self.shortness_of_breath, self.chest_pain, self.loss_of_speech]
 
-        for bool, count in enumerate(med_list):
-            if bool:
+        print(med_list)
+        for isShowing in med_list:
+            count = 0
+            if isShowing:
                 score += 2
+                count += 1
             if count > 3:
                 score += 5
         
-        for bool in high_list:
-            if bool:
+        print(high_list)
+        for isShowing in high_list:
+            if isShowing:
                 score += 10
 
         score = 23 if score > 23 else score
         
-        return int((score / 23) * 5)
+        return int((score / 23) * 4)
 
     diseases = [
         ('DB', 'Diabeties'),
