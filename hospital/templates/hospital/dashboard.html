@@ -15,9 +15,9 @@
 
                       <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0"><a href={% url 'patients' %}>Patient Statistics</a></h5><br>
-                        <span class="h5 font-weight-bold mb-0">Recovered: 350,897</span><br>
-                        <span class="h5 font-weight-bold mb-0">Admitted: 350,897</span><br>
-                        <span class="h5 font-weight-bold mb-0">Deceased: 350,897</span>
+                        <span class="h5 font-weight-bold mb-0">Recovered: {{ statistics.recovered }}</span><br>
+                        <span class="h5 font-weight-bold mb-0">Admitted: {{ statistics.admitted }}</span><br>
+                        <span class="h5 font-weight-bold mb-0">Deceased: {{ statistics.deceased }}</span>
                       </div>
 
                       <div class="col-auto">
@@ -128,7 +128,7 @@
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
+                    <h6 class="text-uppercase text-muted ls-1 mb-1">Stock</h6>
                     <h2 class="mb-0">Medicines</h2>
                   </div>
                 </div>
