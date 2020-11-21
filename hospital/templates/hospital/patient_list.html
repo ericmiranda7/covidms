@@ -1,4 +1,10 @@
 <h1>Patients</h1>
+<p>Search</p>
+<form method="GET">
+{% csrf_token %}
+{{ searchForm }}
+<input type="submit">
+</form>
 <ul>
 {% for patient in object_list %}
     <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
