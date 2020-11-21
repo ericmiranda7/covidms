@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 # Redirect after login / logout
 LOGIN_REDIRECT_URL = '/' #hospital/dashboard
-LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = '/login'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
