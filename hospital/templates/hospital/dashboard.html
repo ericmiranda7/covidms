@@ -15,9 +15,12 @@
 
                       <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0"><a href={% url 'patients' %}>Patient Statistics</a></h5><br>
-                        <span class="h5 font-weight-bold mb-0">Recovered: {{ statistics.recovered }}</span><br>
-                        <span class="h5 font-weight-bold mb-0">Admitted: {{ statistics.admitted }}</span><br>
-                        <span class="h5 font-weight-bold mb-0">Deceased: {{ statistics.deceased }}</span>
+                        
+                        <center>
+                        <div class="p-2 mb-2 bg-success text-white"><h5>Recovered:{{ statistics.recovered }}</div>
+                        <div class="p-2 mb-2 bg-danger text-white"><h5>Admitted: {{ statistics.admitted }}</div>
+                        <div class="p-2 mb-2 bg-light text-dark"><h5>Deceased: {{ statistics.deceased }}</h5></div>
+                      </center>
                       </div>
 
                       <div class="col-auto">
@@ -41,9 +44,12 @@
                     <div class="row">
                       <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Resources</h5><br>
-                        <span class="h5 font-weight-bold mb-0">Bed: 350,897</span><br>
-                        <span class="h5 font-weight-bold mb-0">Ventilator: 350,897</span><br>
-                        <span class="h5 font-weight-bold mb-0">  &nbsp; </span>
+                        
+                        <center>
+                          <div class="p-2 mb-2 bg-success text-white"><h5>Bed: 350,897</div>
+                          <div class="p-2 mb-2 bg-danger text-white"><h5>Ventilator: 350,897</div>
+                          <div class="p-2 mb-2 bg-light text-dark"><h5>Ventilator: 350,897</h5></div>
+                        </center>
                       </div>
                       <div class="col-auto">
                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -64,11 +70,24 @@
                     <div class="row">
                       <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Lab Results</h5><br>
-                        
-                          <span class="h5 font-weight-bold mb-0">Total Test: 1000</span><br>
-                        
-                        <span class="h5 font-weight-bold mb-0">+Ve:  <span class="text-danger mr-2">850</span> </span><br>
-                        <span class="h5 font-weight-bold mb-0">- Ve:  <span class="text-success mr-2">850</span> </span>
+                        <table>
+                          <tr><td colspan="2" >                            
+                              <div class="p-3 mb-2 bg-primary text-white"><h5>Total Test: 1000</h5></div>
+                          </td></tr>
+                          
+                          <tr>
+                            <td>
+                              <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                                <div class="card-header"><h5>+ve : 500</h5></div>                                  
+                              </div>
+                            </td>
+                            <td>
+                              <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header"><h5>-ve : 500</h5></div>  
+                              </div>
+                            </td>
+                          </tr>                        
+                        </table>
                       </div>
                       <div class="col-auto">
                         <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
