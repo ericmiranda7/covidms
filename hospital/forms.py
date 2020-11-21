@@ -15,7 +15,7 @@ class SearchForm(forms.ModelForm):
         (2, 'Severity'),
     ]
 
-    severity = forms.ChoiceField(choices=severities, widget=forms.RadioSelect, required=False)
+    severity = forms.ChoiceField(choices=severities, widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), required=False, label='Sort by')
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
