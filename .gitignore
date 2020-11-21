@@ -2,7 +2,8 @@
 *.pot
 *.py[co]
 .tox/
-__pycache__
+__pycache__/
+*.pyc
 MANIFEST
 dist/
 docs/_build/
