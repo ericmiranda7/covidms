@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="{{ patient.photo.url }}" alt="Card image cap">
+                            <img src="{% static 'images/photo.jpg' %}" alt="Card image cap">
                         </div>
                     </div>
                     <div class="col-md-6 gap">
@@ -34,7 +34,18 @@
                             <p class="profile-rating">RATING: <span>{{ patient.rating }}</span></p>
                             
                            
-                            <p class="profile-rating">STATUS: <span>{{ patient.status }}</span></p>
+                            <p class="profile-rating">STATUS:
+                            <span>
+                            {% if patient.status == 1 %}
+                                Admitted
+                            {% elif patient.status == 2 %}
+                                Discharged
+                            {% elif patient.status == 3 %}
+                                Recovered
+                            {% elif patient.status == 4 %}
+                                Deceased
+                            {% endif %}
+                            </span></p>
                             
                         </div>
                     </div>
@@ -43,34 +54,34 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>CRIME TYPE(S)</label>
+                                                <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ patient.crime_type }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>CRIME DATE(S)</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ patient.date }}</p>
+                                                <p>{{ patient.address }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>CITY</label>
+                                                <label>Insurance</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ patient.city }}</p>
+                                                <p>{{ patient.insurance }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>STATE</label>
+                                                <label>Aadhar Number</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ patient.state }}</p>
+                                                <p>{{ patient.aadhar }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Ward</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.bed.ward }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -93,7 +104,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>PHYSICAL DESCRIPTION</label>
+                                                <label>Symptoms</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ patient.physical_description }}</p>

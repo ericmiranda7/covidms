@@ -21,3 +21,5 @@ urlpatterns = [
     path('', include('hospital.urls')),
     path('', include('accounts.urls')),
 ]
+
+admin.site.index_title = "Patient Management"

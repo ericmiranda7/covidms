@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 # Create your models here.
 from django.db import models
@@ -13,6 +14,7 @@ class Patient(models.Model):
     ]
 
     name = models.CharField(max_length=32)
+    dob = models.DateField()
     address = models.CharField(max_length=128)
     phone_no = models.IntegerField()
     next_of_kin = models.ForeignKey('Kin', on_delete=models.CASCADE, blank=True, null=True)
@@ -28,6 +30,10 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.name
+
+    def age(self):
+        years = date.today() - self.dob
+        return int(years.days / 365)
 
 
 class Kin(models.Model):
@@ -62,10 +68,17 @@ class HealthDetails(models.Model):
     is_smoker = models.BooleanField(default=False)
     is_drinker = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.patient.name + "'s Health Record"
+
 
 class Doctor(models.Model):
     name = models.CharField(max_length=32)
     phone_no = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
 
 class Medicine(models.Model):
     category_types = [
@@ -80,6 +93,10 @@ class Medicine(models.Model):
     qty = models.IntegerField()
     threshold_value = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
+
 class Ward(models.Model):
     type_list = [
         ('ICU', 'ICU'),
@@ -88,13 +105,22 @@ class Ward(models.Model):
 
     type = models.CharField(max_length=3, choices=type_list)
 
+    def __str__(self):
+        return self.type + ' ' + str(self.id)
+
 class Bed(models.Model):
     available = models.BooleanField(default=True)
     ward = models.ForeignKey('Ward', on_delete=models.CASCADE)
     ventilator = models.ManyToManyField('Ventilator', blank=True)
 
+    def __str__(self):
+        return 'Bed ' + str(self.id)
+
 class Ventilator(models.Model):
     available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return 'Ventilator ' + str(self.id)
 
 class LabTest(models.Model):
     type_choices = [
@@ -112,3 +138,6 @@ class LabTest(models.Model):
     testing_date = models.DateTimeField()
     test_duration = models.IntegerField('Hours until test results')
     patient = models.ForeignKey('Patient', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return 'Lab test ' + str(self.id)

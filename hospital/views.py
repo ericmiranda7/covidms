@@ -24,11 +24,11 @@ class PatientListView(ListView):
         if form.is_valid():
             patients = self.model.objects.filter(name__contains=form.cleaned_data['name'])
 
-            sort = int(form.cleaned_data['severity'])
-            if sort == 1:
+            sort = form.cleaned_data['severity']
+            if sort == '1':
                 print('sort name')
                 patients = patients.order_by('name')
-            if sort == 2:
+            if sort == '2':
                 patients = patients.order_by('-health_details__severity')
             
         return patients
