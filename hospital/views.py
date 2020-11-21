@@ -7,9 +7,31 @@ from . import models
 from .forms import SearchForm
 
 # Create your views here.
+
+
 @login_required
 def dashboard(request):
-    return render(request, 'hospital/dashboard.html')
+    patients = models.Patient.objects.all()
+
+    statistics = {
+        "recovered": 0,
+        "admitted": 0,
+        "deceased": 0,
+    }
+
+    for patient in patients:
+
+        if patient.status == 1:
+            statistics['admitted'] += 1
+        elif patient.status == 3:
+            statistics['recovered'] += 1
+        elif patient.status == 4:
+            statistics['deceased'] += 1
+
+    context = {}
+    context['statistics'] = statistics
+
+    return render(request, 'hospital/dashboard.html', context)
 
 
 class PatientListView(ListView):
@@ -22,7 +44,8 @@ class PatientListView(ListView):
         patients = super(PatientListView, self).get_queryset(**kwargs)
 
         if form.is_valid():
-            patients = self.model.objects.filter(name__contains=form.cleaned_data['name'])
+            patients = self.model.objects.filter(
+                name__contains=form.cleaned_data['name'])
 
             sort = form.cleaned_data['severity']
             if sort == '1':
@@ -30,7 +53,7 @@ class PatientListView(ListView):
                 patients = patients.order_by('name')
             if sort == '2':
                 patients = patients.order_by('-health_details__severity')
-            
+
         return patients
 
     def get_context_data(self, **kwargs):
