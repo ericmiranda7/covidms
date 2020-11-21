@@ -17,9 +17,19 @@
                         <h5 class="card-title text-uppercase text-muted mb-0"><a href={% url 'patients' %}>Patient Statistics</a></h5><br>
                         
                         <center>
-                        <div class="p-2 mb-2 bg-success text-white"><h5>Recovered:{{ statistics.recovered }}</div>
+                        <!-- <div class="p-2 mb-2 bg-success text-white"><h5>Recovered:{{ statistics.recovered }}</div>
                         <div class="p-2 mb-2 bg-danger text-white"><h5>Admitted: {{ statistics.admitted }}</div>
-                        <div class="p-2 mb-2 bg-light text-dark"><h5>Deceased: {{ statistics.deceased }}</h5></div>
+                        <div class="p-2 mb-2 bg-light text-dark"><h5>Deceased: {{ statistics.deceased }}</h5></div> -->
+
+                        <div class="card text-white bg-success mb-3 p-0" style="max-width: 18rem;">
+                          <div class="card-header"><h5>Recovered:{{ statistics.recovered }}</h5></div>  
+                        </div>
+                        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                          <div class="card-header"><h5>Admitted: {{ statistics.admitted }}</h5></div>                                  
+                        </div>
+                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                          <div class="card-header"><h5>Deceased: {{ statistics.deceased }}</h5></div>                                  
+                        </div>
                       </center>
                       </div>
 
@@ -46,9 +56,20 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Resources</h5><br>
                         
                         <center>
-                          <div class="p-2 mb-2 bg-success text-white"><h5>Bed: 350,897</div>
+                          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><h5>Bed: 350</h5></div>                                  
+                          </div>
+
+                          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><h5>Ventilator: 35</h5></div>                                  
+                          </div>
+
+                          <!-- <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><h5>Total : 500</h5></div>                                  
+                          </div> -->
+                          <!-- <div class="p-2 mb-2 bg-success text-white"><h5>Bed: 350,897</div>
                           <div class="p-2 mb-2 bg-danger text-white"><h5>Ventilator: 350,897</div>
-                          <div class="p-2 mb-2 bg-light text-dark"><h5>Ventilator: 350,897</h5></div>
+                          <div class="p-2 mb-2 bg-light text-dark"><h5>Ventilator: 350,897</h5></div> -->
                         </center>
                       </div>
                       <div class="col-auto">
@@ -72,7 +93,9 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Lab Results</h5><br>
                         <table>
                           <tr><td colspan="2" >                            
-                              <div class="p-3 mb-2 bg-primary text-white"><h5>Total Test: 1000</h5></div>
+                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                              <div class="card-header"><h5>Total : 500</h5></div>                                  
+                            </div>
                           </td></tr>
                           
                           <tr>
