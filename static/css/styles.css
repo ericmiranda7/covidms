@@ -113,3 +113,107 @@
   }
   
   /*#endregion*/
+
+
+
+
+  .body-padding {
+    padding-top: 5em;
+}
+
+@media (max-width: 979px) {
+    .body-padding {
+        padding-top: 55px;
+    }
+}
+
+#mainNav {
+    padding: 0.5em;
+}
+
+#mainNav.navbar-shrink {
+    padding: 0;
+}
+
+.dropdown>a {
+    color: white;
+}
+
+
+label{
+	font-size: 140%;
+}
+input,
+select{
+	    display: block;
+    width: 100%;
+    height: calc(1.5em + 1rem);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0.125rem solid #ced4da;
+    border-radius: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.boxShadow{
+	width: 51%;
+    padding: 4em;
+    margin-left: 17em;
+    margin-top: 0em;
+    box-shadow: 2.5px 2.5px 10px grey;
+    border-radius: 20px;
+    background-color: #e1effd;
+}
+
+.E {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+    font-size: 80%;
+    text-align: center;
+	color: #fff;
+	padding: 1em 1em;
+	background-color: red;
+	border-radius: 20px;
+}
+
+.T {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 80%;
+	color: #fff;
+	padding: 1em 1em;
+	background-color: #656060;
+	border-radius: 20px;
+}
+
+.submitreq {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 80%;
+	color: #fff;
+	padding: 1em 1em;
+	background-color: #007bff;;
+	border-radius: 20px;
+}
+
+.S {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+    font-size: 80%;
+    text-align: center;
+	color: #fff;
+	padding: 1em 1em;
+	background-color: tomato;
+	border-radius: 20px;
+}
+
+.contentCenter{
+  width: 50%;
+  margin: 0 auto;
+}
