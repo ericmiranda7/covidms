@@ -17,21 +17,25 @@
             <p>Search</p>
             <form method="GET">
                 {% csrf_token %}
-                {{ searchForm.as_p }}
+                {{ searchForm }}
                 <input type="submit">
             </form>
-            <ul>
-                {% for patient in object_list %}
-                    <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
-                {% empty %}
-                    <li>No articles yet.</li>
-                {% endfor %}
-            </ul>
+
+
+
+           
             
-        </div>
-            
-        <!-- SignInSection Form-->
+        </div>            
+        <ul>
+            <h1>Patient list</h1>  
+            {% for patient in object_list %}
+                <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
+            {% empty %}
+                <li>No articles yet.</li>
+            {% endfor %}
+        </ul>
     </div>
+    
 </section>
 
 {% endblock %}
