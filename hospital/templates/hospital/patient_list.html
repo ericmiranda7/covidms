@@ -27,13 +27,24 @@
             
         </div>            
         <ul>
-            <h1>Patient list</h1>  
-            {% for patient in object_list %}
-                <li><a href={% url 'detail' patient.id %}>{{patient.name}}</a></li>
-            {% empty %}
-                <li>No articles yet.</li>
-            {% endfor %}
+            <h1>Patients</h1>  
         </ul>
+
+        <table style="width: 100%">
+            <tbody>
+            <th>Patient</th>
+            <th>Age</th>
+            {% for patient in object_list %}
+                <tr><td><a href={% url 'detail' patient.id %}>{{patient.name}}</a></td>
+                <td>{{ patient.age }}</td>
+                </tr>
+            {% empty %}
+                <tr><td>No patients yet.</td></tr>
+            {% endfor %}
+
+           
+            </tbody>
+        </table>
     </div>
     
 </section>
