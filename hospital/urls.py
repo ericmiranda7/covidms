@@ -3,4 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard),
+    path('patients/', views.PatientListView.as_view(), name='patients'),
+    path('patient/<int:pk>', views.PatientDetailView.as_view(), name='detail'),
 ]
