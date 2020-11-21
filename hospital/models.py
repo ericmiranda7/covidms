@@ -31,6 +31,7 @@ class Patient(models.Model):
     status = models.IntegerField(choices=patient_status, default=1)
     doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, blank=True, null=True)
     admit_date = models.DateTimeField()
+    recovery_date = models.DateField(blank=True, null=True)
     discharge_date = models.DateTimeField(blank=True, null=True)
     bed = models.OneToOneField('Bed', on_delete=models.SET_NULL, blank=True, null=True)
     medicines = models.ManyToManyField('Medicine', blank=True)

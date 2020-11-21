@@ -20,7 +20,6 @@ def dashboard(request):
     }
 
     for patient in patients:
-
         if patient.status == 1:
             statistics['admitted'] += 1
         elif patient.status == 3:
