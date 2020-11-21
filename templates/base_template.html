@@ -9,10 +9,64 @@
 	<!-- Favicon - loaded as static -->
 	<!-- <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
 	</head>
-	<body>
+	<!-- <body>
 		{% block body %}
 		
 		{% endblock %}
+	</body> -->
+
+	
+<body class="{% if not request.resolver_match.url_name == 'home' %} body-padding {% endif %}">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#">COVID-HMS</a>
+            <button
+                class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+					<li class="nav-item mx-0 mx-lg-1"><a
+						class="nav-link py-3 px-0 px-lg-3 rounded {% if request.resolver_match.url_name == 'about'%}active{% endif %}"
+						href="#">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a
+                            class="nav-link py-3 px-0 px-lg-3 rounded {% if request.resolver_match.url_name == 'about'%}active{% endif %}"
+                            href="#">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#">Add Patient</a></li>
+                    
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#">Login</a></li>
+                    {% else %}
+                    <div class="dropdown show">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-item"
+                            href="#">Profile</a>
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-item"
+                            href="#">Logout</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<br><br><br><br><br>
+	{% block bodyContent %}
+	 	replace here
+	{% endblock %}
 	</body>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
