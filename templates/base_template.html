@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
+	<!-- Static assets - Used to load the Favicon -->
+	{% load static %}
 	<head>
 		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
+
+	<!-- Favicon - loaded as static -->
+	<!-- <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
 	</head>
 	<body>
 		{% block body %}
+		
 		{% endblock %}
 	</body>
 </html>
+
+
