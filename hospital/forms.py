@@ -15,6 +15,7 @@ class SearchForm(forms.ModelForm):
         (2, 'Severity'),
     ]
 
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-text'}))
     severity = forms.ChoiceField(choices=severities, widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), required=False, label='Sort by')
 
     def __init__(self, *args, **kwargs):

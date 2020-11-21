@@ -223,3 +223,8 @@ radio{
   height: 1em;
 }
 
+.custom-radio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
