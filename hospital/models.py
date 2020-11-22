@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth.models import User
 
 # Create your models here.
 from django.db import models
@@ -128,8 +129,16 @@ class HealthDetails(models.Model):
 
 
 class Doctor(models.Model):
-    name = models.CharField(max_length=32)
-    phone_no = models.IntegerField()
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='doctor',
+    )
+    name = models.CharField(default='dr', max_length=32)
+    phone_no = models.IntegerField(blank=True, null=True)
+    patients = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

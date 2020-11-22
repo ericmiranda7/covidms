@@ -1,4 +1,6 @@
 {% extends 'base_template.html' %}
+{% load custom_tags %}
+{%block css %} <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css'%}"> {% endblock %}
 
 {% block bodyContent %}
     <!-- Stastistics display -->
@@ -135,7 +137,7 @@
                     <h2 class="text-white mb-0">Graphs</h2>
                   </div>
 
-                  <img src="data:image/png;base64,{{ data }}  height="250", width="250" alt="">
+                  <img {% comment %} src="data:image/png;base64{{ data }}  height="250", width="250" alt="" {% endcomment %}>
                   <!-- <div class="col">
                     <ul class="nav nav-pills justify-content-end">
                       <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
@@ -163,16 +165,25 @@
               <div class="card-header bg-transparent">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h6 class="text-uppercase text-info ls-1 mb-1">Stock</h6>
-                    <h2 class="mb-0">Medicines</h2>
+                    <h6 class="text-uppercase text-info ls-1 mb-1">Quick Glance</h6>
+                    <h2 class="mb-0">Appointments</h2>
                   </div>
                 </div>
               </div>
               <div class="card-body">
                 <!-- Chart -->
-                <div class="chart">
-                  <canvas id="chart-orders" class="chart-canvas"></canvas>
-                </div>
+                <h6>Welcome, {{ request.user.doctor.name }} !</h6>
+                <table class="gridList ct">
+                  <tbody>
+                  <th class="cth">Patient</th class="cth">
+                  <th class="cth">Ward</th>
+                  <th class="cth">Severity</th>
+                {% for patient in request.user.doctor.patient_set.all|sort_by:'-severity' %}
+                  <tr class=".ctr"><td><a href={% url 'detail' patient.id %}>{{patient.name}}</a></td>
+                  <td class=".ctd">{{ patient.bed.ward }}</td class=".ctd">
+                  <td class=".ctd">{{ patient.severity }}</td>
+                  </tr class=".ctr">
+                {% endfor %}
               </div>
             </div>
           </div>
