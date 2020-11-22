@@ -20,9 +20,9 @@ admin.site.register(model_list)
 
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ['name', 'severity', 'admit_date', 'get_ward']
-    list_filter = ['severity']
-    search_fields = ['name', 'aadhar', 'insurance', 'status',]
+    list_display = ['name', 'severity', 'admit_date', 'get_ward', 'doctor']
+    list_filter = ['severity', 'doctor', 'bed__ward']
+    search_fields = ['name', 'aadhar', 'insurance', 'status', 'doctor__name']
 
     def get_ward(self, obj):
         try:
@@ -95,4 +95,9 @@ def assign_doctor(sender, instance, created, **kwargs):
     instance.doctor = qs[0]
     if created:
         instance.save()
+
+@receiver(pre_delete, sender=models.Patient)
+def free_doctor(sender, instance, **kwargs):
+    instance.doctor.patients -= 1
+    instance.doctor.save()
 

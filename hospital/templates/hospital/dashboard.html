@@ -184,6 +184,12 @@
                   <td class=".ctd">{{ patient.severity }}</td>
                   </tr class=".ctr">
                 {% endfor %}
+                {% if request.user.doctor.patient_set.count == 0 %}
+                  <tr class=".ctr"><td>None</td>
+                  <td class=".ctd">None</td class=".ctd">
+                  <td class=".ctd">None</td>
+                  </tr class=".ctr">
+                {% endif %}
               </div>
             </div>
           </div>
