@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<!-- Static assets - Used to load the Favicon -->
+	{% load static %}
+	<head>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
+        {% block css %} {% endblock %}
+
+	<!-- Favicon - loaded as static -->
+	<!-- <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
+	</head>
+
+
+	
+<body class="{% if not request.resolver_match.url_name == 'home' %} body-padding {% endif %}">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{% url 'dashboard' %}">COVID-HMS</a>
+            <button
+                class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+					<li class="nav-item mx-0 mx-lg-1"><a
+						class="nav-link py-3 px-0 px-lg-3 rounded {% if request.resolver_match.url_name == 'about'%}active{% endif %}"
+						href="http://localhost:8000/admin/">Staff</a></li>
+                   
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="http://localhost:8000/admin/hospital/patient/">Patient Listing</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="http://localhost:8000/admin/hospital/patient/add/">Add Patient</a></li>
+                    
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#">Login</a></li>
+                    {% else %}
+                    <div class="dropdown show">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-item"
+                            href="#">Profile</a>
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-item"
+                            href={% url 'logout' %}>Logout</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<!-- <br><br><br><br><br> -->
+	{% block bodyContent %}
+	{% endblock %}
+	</body>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</html>
+
+

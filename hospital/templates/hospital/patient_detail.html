@@ -1,0 +1,118 @@
+{% extends 'base_template.html' %}
+
+{% block bodyContent %}
+    <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{% static 'images/photo.jpg' %}" alt="Card image cap">
+                        </div>
+                    </div>
+                    <div class="col-md-6 gap">
+                        <div class="profile-head">
+                                    <h3>
+                                        {{ patient.name }}
+                                    </h3>
+                                   
+                            <hr class="break">        
+                            <ul class="nav nav-tabs tab-top-gap" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ABOUT</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">DESCRIPTION</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">                            
+                           
+                            <p class="profile-rating">STATUS:
+                            <span>
+                            {% if patient.status == 1 %}
+                                Admitted
+                            {% elif patient.status == 2 %}
+                                Discharged
+                            {% elif patient.status == 3 %}
+                                Recovered
+                            {% elif patient.status == 4 %}
+                                Deceased
+                            {% endif %}
+                            </span></p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.address }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Insurance</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.insurance }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Aadhar Number</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.aadhar }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Ward</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.bed.ward }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Severity</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.health_details.severity }}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>AGE</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.age }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Symptoms</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ patient.physical_description }}</p>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+{% endblock %}

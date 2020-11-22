@@ -1,0 +1,52 @@
+{% extends 'base_template.html' %}
+
+{% block bodyContent %}
+<section class="page-section" id="contact">
+    <div class="container">
+        <!-- SignInSection Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Patients</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><b>*</b></div>
+            <div class="divider-custom-line"></div>
+        </div>
+         <!-- SignInSection Form-->
+            <div class="form-group boxShadow">
+    
+            <h1 style="text-align: center">Search</h1>
+            <form method="GET">
+                {% csrf_token %}
+                {{ searchForm }}
+                <input type="submit">
+            </form>
+
+
+
+           
+            
+        </div>            
+        <ul>
+            <h1>Patients</h1>  
+        </ul>
+
+        <table class="gridList">
+            <tbody>
+            <th>Patient</th>
+            <th>Age</th>
+            {% for patient in object_list %}
+                <tr><td><a href={% url 'detail' patient.id %}>{{patient.name}}</a></td>
+                <td>{{ patient.age }}</td>
+                </tr>
+            {% empty %}
+                <tr><td>No patients yet.</td></tr>
+            {% endfor %}
+
+           
+            </tbody>
+        </table>
+    </div>
+    
+</section>
+
+{% endblock %}
